@@ -19,17 +19,16 @@ public class RadioButtonDemo extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Create and set up radio buttons
         JPanel radioPanel = new JPanel();
         radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS));
 
-        
         birdBtn = new JRadioButton("Bird");
         catBtn = new JRadioButton("Cat");
         dogBtn = new JRadioButton("Dog");
         rabbitBtn = new JRadioButton("Rabbit");
         pigBtn = new JRadioButton("Pig");
 
-        
         group = new ButtonGroup();
         group.add(birdBtn);
         group.add(catBtn);
@@ -37,21 +36,19 @@ public class RadioButtonDemo extends JFrame implements ActionListener {
         group.add(rabbitBtn);
         group.add(pigBtn);
 
-        
         radioPanel.add(birdBtn);
         radioPanel.add(catBtn);
         radioPanel.add(dogBtn);
         radioPanel.add(rabbitBtn);
         radioPanel.add(pigBtn);
 
-       
         birdBtn.addActionListener(this);
         catBtn.addActionListener(this);
         dogBtn.addActionListener(this);
         rabbitBtn.addActionListener(this);
         pigBtn.addActionListener(this);
 
-       
+        // Label to show image
         imageLabel = new JLabel("Select a pet", SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
         imageLabel.setPreferredSize(new Dimension(200, 200));
@@ -69,32 +66,32 @@ public class RadioButtonDemo extends JFrame implements ActionListener {
 
         if (e.getSource() == birdBtn) {
             pet = "Bird";
-            imagePath += "bird.png";
+            imagePath += "bird.jpeg";
         } else if (e.getSource() == catBtn) {
             pet = "Cat";
-            imagePath += "cat.png";
+            imagePath += "cat.jpeg";
         } else if (e.getSource() == dogBtn) {
             pet = "Dog";
-            imagePath += "dog.png";
+            imagePath += "dog.jpeg";
         } else if (e.getSource() == rabbitBtn) {
             pet = "Rabbit";
-            imagePath += "rabbit.png";
+            imagePath += "rabbit.jpeg";
         } else if (e.getSource() == pigBtn) {
             pet = "Pig";
-            imagePath += "pig.png";
+            imagePath += "pig.jpeg";
         }
 
-        
         File imgFile = new File(imagePath);
         if (imgFile.exists()) {
-            imageLabel.setIcon(new ImageIcon(imagePath));
+            ImageIcon icon = new ImageIcon(imagePath);
+            Image scaledImage = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(scaledImage));
             imageLabel.setText("");
         } else {
             imageLabel.setIcon(null);
             imageLabel.setText("Image not found!");
         }
 
-       
         JOptionPane.showMessageDialog(this, "You selected: " + pet);
     }
 
